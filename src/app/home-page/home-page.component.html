@@ -1,0 +1,10 @@
+<div class="quizzes"
+     *ngIf="mapTests; else loading"
+>
+  <app-quiz *ngFor="let test of mapTests"
+    [test] = test
+  ></app-quiz>
+</div>
+<ng-template #loading>
+  <p class="text-center">Loading posts...</p>
+</ng-template>
