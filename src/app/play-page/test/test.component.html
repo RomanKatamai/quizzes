@@ -1,0 +1,10 @@
+<div>{{test.question}}</div>
+<div>
+  <button
+    class="btn btn-dark"
+    *ngFor="let answer of test.answers"
+    (click)="respond(this.answer)"
+  >
+    {{answer}}
+  </button>
+</div>

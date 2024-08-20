@@ -1,5 +1,12 @@
 <div>
-  <h2></h2>
+  <h2>{{ title }}</h2>
+  <small>{{ quantity }}</small>
 
+  <app-test
+    [test] = tests[index]
+    (answerSelected)="calculatePoints($event)"
+  ></app-test>
 
+  <button class="btn" routerLink="/" (click)="closing()">Cancel the quiz</button>
 </div>
+

@@ -1,1 +1,4 @@
-<p>result-page works!</p>
+<div>
+  {{points}} / {{quantity}}
+  <a [routerLink]="['/home']" (click)="localStorage.clear()">Home page</a>
+</div>

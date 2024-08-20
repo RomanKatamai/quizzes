@@ -4,15 +4,16 @@ import { MainLayoutComponent } from "./shared/components/main-layout/main-layout
 import { HomePageComponent } from "./home-page/home-page.component";
 import { PlayPageComponent } from "./play-page/play-page.component";
 import { ResultPageComponent } from "./result-page/result-page.component";
-
+import {ErrorPageComponent} from "./error-page/error-page.component";
 
 const routes: Routes = [
   {path: '', component: MainLayoutComponent, children: [
-    {path: '', redirectTo: '/', pathMatch: "full"},
-    {path: '', component: HomePageComponent},
-    {path: 'play', component: PlayPageComponent},
-    {path: 'finish', component: ResultPageComponent}
-    ]}
+      {path: 'home', component: HomePageComponent},
+      {path: 'play', component: PlayPageComponent},
+      {path: 'finish', component: ResultPageComponent},
+      {path: '', redirectTo: 'home', pathMatch: 'full'},
+      {path: '**', component: ErrorPageComponent}
+    ]},
 ];
 
 @NgModule({

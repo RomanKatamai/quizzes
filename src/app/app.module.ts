@@ -5,10 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { HttpClientModule } from '@angular/common/http';
 import { PlayPageComponent } from './play-page/play-page.component';
-import { ResultPageComponent } from './result-page/result-page.component';
-import { QuizComponent } from './shared/components/quiz/quiz.component';
-import { HttpClientModule } from "@angular/common/http";
+import { ResultPageComponent } from "./result-page/result-page.component";
+import { CardComponent } from "./shared/components/card/card.component";
+import { ErrorPageComponent } from './error-page/error-page.component';
+import { TestComponent } from './play-page/test/test.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { HttpClientModule } from "@angular/common/http";
     HomePageComponent,
     PlayPageComponent,
     ResultPageComponent,
-    QuizComponent
+    CardComponent,
+    ErrorPageComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

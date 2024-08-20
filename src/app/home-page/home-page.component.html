@@ -1,9 +1,20 @@
+<div>
+  <h2>List of quizzes</h2>
+  <button
+    class="btn btn-dark"
+    (click)="randomQuiz()"
+    [routerLink]="['/play']"
+    [disabled]="!mapTests.length"
+  >
+    I'm lucky
+  </button>
+</div>
 <div class="quizzes"
      *ngIf="mapTests; else loading"
 >
-  <app-quiz *ngFor="let test of mapTests"
+  <app-card *ngFor="let test of mapTests"
     [test] = test
-  ></app-quiz>
+  ></app-card>
 </div>
 <ng-template #loading>
   <p class="text-center">Loading posts...</p>

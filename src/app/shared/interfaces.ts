@@ -8,12 +8,14 @@ export interface TriviaCategories {
 }
 
 export interface Test {
-  title: string;
-  quantity: number;
+  title: string,
+  quantity: number,
   type: string,
   difficulty: string,
   category: string,
   question: string,
   correct_answer: string,
-  incorrect_answers: []
+  incorrect_answers: [],
+  results?: [],
+  answers?: string[]
 }

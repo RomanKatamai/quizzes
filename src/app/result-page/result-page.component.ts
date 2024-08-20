@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./result-page.component.scss']
 })
 export class ResultPageComponent {
+  points!: string
+  quantity!: number
+  constructor() {
+    this.quantity = JSON.parse(localStorage.getItem('test') as string).quantity
+    this.points = localStorage.getItem('points') as string
+  }
 
+  protected readonly localStorage = localStorage;
 }
