@@ -5,13 +5,17 @@ import { Component } from '@angular/core';
   templateUrl: './result-page.component.html',
   styleUrls: ['./result-page.component.scss']
 })
+
 export class ResultPageComponent {
-  points!: string
-  quantity!: number
+  points!: string;
+  quantity!: number;
+
   constructor() {
-    this.quantity = JSON.parse(localStorage.getItem('test') as string).quantity
-    this.points = localStorage.getItem('points') as string
+    this.quantity = JSON.parse(localStorage.getItem('test') as string).quantity;
+    this.points = localStorage.getItem('points') as string;
   }
 
-  protected readonly localStorage = localStorage;
+  clearData() {
+    localStorage.clear();
+  }
 }

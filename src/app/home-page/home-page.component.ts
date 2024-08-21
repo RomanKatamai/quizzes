@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { QuizzesService } from "../shared/quizzes.service";
-import { Category, Test } from "../shared/interfaces";
-import {interval, startWith, switchMap, take, tap} from "rxjs";
+import { interval, startWith, switchMap, take, tap } from 'rxjs';
 
+import { QuizzesService } from '../shared/quizzes.service';
+import { Category, Test } from '../shared/interfaces';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })
+
 export class HomePageComponent implements OnInit {
   mapCategory!: Category[];
-  idCategoryMax!: number
-  idCategoryMin!: number
-  randomCategory!: number
-  mapTests: Test[] = []
-  quantity!: number
-  title!: string
-  disabled = true
+  idCategoryMax!: number;
+  idCategoryMin!: number;
+  randomCategory!: number;
+  mapTests: Test[] = [];
+  quantity!: number;
+  title!: string;
+  disabled = true;
+
   constructor(private quizzesService: QuizzesService) {};
 
   ngOnInit() {
@@ -44,12 +46,16 @@ export class HomePageComponent implements OnInit {
       )
       .subscribe((test: Test) => {
         test.quantity = this.quantity;
-        test.title = this.mapCategory.filter(el => el.id === this.randomCategory).map(el => el.name).join();
+        test.title = this.mapCategory.filter(el => el.id === this.randomCategory)
+          .map(el => el.name).join();
         this.mapTests.push(test);
       });
   }
 
   randomQuiz() {
-    localStorage.setItem('test', JSON.stringify(this.mapTests[Math.floor(Math.random() * (this.mapTests.length))]));
+    localStorage.setItem('test', JSON.stringify(this.mapTests[
+      Math.floor(Math.random() * (this.mapTests.length))
+      ])
+    );
   }
 }
