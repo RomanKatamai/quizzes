@@ -1,10 +1,12 @@
-<div>{{ test.question }}</div>
-<div>
-  <button
-    class="btn btn-dark"
-    *ngFor="let answer of test.answers"
-    (click)="respond(this.answer)"
-  >
-    {{ answer }}
-  </button>
+<div class="border border-[#ccc] border-solid rounded-[7px] p-4 my-[0.7rem]">
+  <div class="text-center pb-7 pt-7">{{ test.question }}</div>
+  <div class="block-answers-button pb-5">
+    <button
+      class="answer-button mt-2 hover:bg-blue-sky hover:text-white hover:ring"
+      *ngFor="let answer of test.answers"
+      (click)="respond(this.answer)"
+    >
+     {{ answer }}
+    </button>
+  </div>
 </div>

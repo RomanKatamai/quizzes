@@ -1,12 +1,19 @@
 <div>
-  <h2>{{ title }}</h2>
-  <small>{{ quantity }}</small>
+  <h2 class="text-center text-4xl pt-10 pb-6 font-bold">{{ title }}</h2>
+  <h3 class="text-2xl mb-8 mt-4">Question № {{ index + 1 }} / {{ quantity }}</h3>
 
   <app-test
     [test] = tests[index]
     (answerSelected)="calculatePoints($event)"
   ></app-test>
-
-  <button class="btn" routerLink="/" (click)="closing()">Cancel the quiz</button>
-</div>
+  <div class="flex justify-center mt-5">
+    <button
+      class="btn w-full max-w-[200px] py-2 rounded hover:bg-blue-sky hover:hover:opacity-80"
+      routerLink="/"
+      (click)="closing()"
+    >
+      Cancel the quiz
+    </button>
+  </div>
+  </div>
 

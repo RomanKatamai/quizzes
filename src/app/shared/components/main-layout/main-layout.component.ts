@@ -6,4 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-layout.component.scss']
 })
 
-export class MainLayoutComponent {}
+export class MainLayoutComponent {
+  goHome() {
+    localStorage.clear()
+  }
+}

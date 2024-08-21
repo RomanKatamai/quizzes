@@ -1,0 +1,29 @@
+.answer-button {
+  display: flex;
+  justify-content: center;
+  border: #ccc 2px solid;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.4rem 0.9rem;
+}
+
+.block-answers-button {
+  display: grid;
+  max-width: 1100px;
+  grid-template-columns: repeat(2, minmax(100px, 400px));
+  grid-column-gap: 50px;
+  grid-row-gap: 5px;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .block-answers-button {
+    grid-template-columns: 1fr;
+    grid-column-gap: 10px;
+  }
+
+  .answer-button {
+    padding: 0.2rem 0.4rem;
+  }
+}

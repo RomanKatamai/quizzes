@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { interval, startWith, switchMap, take, tap } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { interval, startWith, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
 import { QuizzesService } from '../shared/quizzes.service';
 import { Category, Test } from '../shared/interfaces';
@@ -10,7 +10,7 @@ import { Category, Test } from '../shared/interfaces';
   styleUrls: ['./home-page.component.scss']
 })
 
-export class HomePageComponent implements OnInit {
+export class HomePageComponent implements OnInit, OnDestroy {
   mapCategory!: Category[];
   idCategoryMax!: number;
   idCategoryMin!: number;
@@ -19,12 +19,14 @@ export class HomePageComponent implements OnInit {
   quantity!: number;
   title!: string;
   disabled = true;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private quizzesService: QuizzesService) {};
 
   ngOnInit() {
     this.quizzesService.getCategories()
       .pipe(
+        takeUntil(this.destroy$),
         tap(quiz => {
           this.mapCategory = quiz.trivia_categories;
           this.idCategoryMax = Math.max(...this.mapCategory.map(el => el.id));
@@ -32,6 +34,7 @@ export class HomePageComponent implements OnInit {
         }),
         switchMap(() => interval(5500)
           .pipe(
+            takeUntil(this.destroy$),
             startWith(0),
             take(10),
             switchMap(() => {
@@ -50,6 +53,11 @@ export class HomePageComponent implements OnInit {
           .map(el => el.name).join();
         this.mapTests.push(test);
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   randomQuiz() {

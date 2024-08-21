@@ -1,7 +1,10 @@
-<nav class="navbar main">
-  <div><h1>Quizzes</h1></div>
+<nav class="navbar flex justify-center items-center z-[1] w-full opacity-90 px-[8rem]
+ py-[0.7rem] mb-[1rem] border-b border-[var(--dark-color)] text-white text-[20px]">
+  <div class="my-3">
+    <a class="text-4xl font-bold" routerLink="/" (click)="goHome()">Quizzes</a>
+  </div>
 </nav>
 
-<div class="container">
+<div class="max-w-[1100px] mx-auto overflow-hidden px-8">
   <router-outlet></router-outlet>
 </div>

@@ -1,10 +1,10 @@
-<div class="card">
-  <div class="card-header">
-    <h2>{{ test.title }}</h2>
-    <div class="creation-data">
-      <small>Number of questions: {{ test.quantity }}</small>
+<div class="border border-[#ccc] border-solid rounded-[7px] p-4 my-[0.7rem]">
+  <div class="text-xl">
+    <h2 class="pb-2.3 text-blue font-bold">{{ test.title }}</h2>
+    <div class="pb-1">
+      <small class="text-sm">Number of questions: {{ test.quantity }}</small>
     </div>
-    <button class="btn btn-dark" [routerLink]="['/play']"
+    <button class="btn rounded py-2 px-3 hover:bg-blue-sky hover:opacity-80" [routerLink]="['/play']"
      (click)="startQuiz()"
     >Start quiz</button>
   </div>
