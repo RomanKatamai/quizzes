@@ -3,9 +3,17 @@
     <div class="text-4xl text-center mt-8 mb-4">
       {{ points }} / {{ quantity }}
     </div>
-    <div class="text-2xl text-center mb-8">
-      Used time: {{ time }}
-    </div>
+  <div class="text-center text-2xl mt-8 mb-4">
+    Percentage of correct answers: <strong>{{ percent }}%</strong>
+  </div>
+  <div class="text-2xl text-center mb-4">
+    Used time: {{ time }}
+  </div>
+  <div class="text-center mb-8 text-3xl">
+    <strong *ngIf="percent < 50">Next attempt will be better!</strong>
+    <strong *ngIf="percent >= 50">Nice try!</strong>
+    <strong *ngIf="percent == 100">You won!</strong>
+  </div>
   <div class="flex justify-center">
     <button
       class="btn rounded w-full max-w-[200px] py-2 hover:bg-blue-sky hover:opacity-80"
@@ -14,5 +22,4 @@
     >
       Home page</button>
   </div>
-
 </div>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-result-page',
   templateUrl: './result-page.component.html',
@@ -7,13 +8,16 @@ import { Component } from '@angular/core';
 })
 
 export class ResultPageComponent {
-  points!: string;
+  points!: number;
   quantity!: number;
-  time!: string
+  time!: string;
+  percent!: number;
+
   constructor() {
     this.quantity = JSON.parse(localStorage.getItem('test') as string).quantity;
-    this.points = localStorage.getItem('points') as string;
-    this.time = localStorage.getItem('time-spent') as string
+    this.points = parseInt(localStorage.getItem('points') as string);
+    this.time = localStorage.getItem('time-spent') as string;
+    this.percent = Math.round((this.points / this.quantity) * 100);
   }
 
   clearData() {

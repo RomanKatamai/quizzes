@@ -42,13 +42,13 @@ export class PlayPageComponent implements OnInit {
 
       localStorage.setItem('points', this.points.toString());
 
-      this.stopTime()
+      this.stopTime();
     } else {
       this.index++;
     }
   }
   stopTime() {
-    const duration = new Date().getTime() - this.startTime
+    const duration = new Date().getTime() - this.startTime;
 
     const hours = Math.floor(duration / 3600000)
       .toString().padStart(2, '0');

@@ -1,13 +1,16 @@
 <div class="flex justify-between mt-8 mb-4">
   <h3 class="content-center text-2xl">List of quizzes</h3>
-  <button
-    class="btn rounded py-2 px-3 hover:bg-blue-sky hover:opacity-80"
-    (click)="randomQuiz()"
-    [routerLink]="['/play']"
-    [disabled]="!mapTests.length"
-  >
-    I'm lucky
-  </button>
+  <div class="loader" *ngIf="mapTests.length < 10"></div>
+  <div>
+    <button
+      class="btn rounded py-2 px-3 hover:bg-blue-sky hover:opacity-80"
+      (click)="randomQuiz()"
+      [routerLink]="['/play']"
+      [disabled]="!mapTests.length"
+    >
+      I'm lucky
+    </button>
+  </div>
 </div>
 <div class="quizzes"
      *ngIf="mapTests; else loading"
