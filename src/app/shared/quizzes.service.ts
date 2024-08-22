@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Test, TriviaCategories } from './interfaces';
+import { environment } from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,10 @@ export class QuizzesService {
   }
 
   getCategories(): Observable<TriviaCategories> {
-    return this.http.get<TriviaCategories>('https://opentdb.com/api_category.php')
+    return this.http.get<TriviaCategories>(`${environment.DBUrl}_category.php`)
   };
 
   getTests(id: number, quantity: number): Observable<Test>{
-    return this.http.get<Test>(`https://opentdb.com/api.php?amount=${quantity}&category=${id}`)
+    return this.http.get<Test>(`${environment.DBUrl}.php?amount=${quantity}&category=${id}`)
   };
 }

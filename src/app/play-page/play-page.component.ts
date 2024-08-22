@@ -20,12 +20,23 @@ export class PlayPageComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    const quiz = JSON.parse(localStorage.getItem('test') as string);
-    this.startTime = new Date().getTime()
-    this.title = quiz.title;
-    this.tests = quiz.results;
-    this.quantity = quiz.quantity;
-    this.randomizeAnswers();
+    const quizJson= localStorage.getItem('test') as string;
+
+    if(quizJson) {
+      const quiz = JSON.parse(quizJson)
+
+      this.startTime = new Date().getTime()
+
+      this.title = quiz.title;
+
+      this.tests = quiz.results;
+
+      this.quantity = quiz.quantity;
+
+      this.randomizeAnswers();
+    } else {
+      this.router.navigate(['/error'])
+    }
   }
 
   randomizeAnswers() {

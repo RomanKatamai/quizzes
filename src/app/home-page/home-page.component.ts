@@ -14,7 +14,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   mapCategory!: Category[];
   idCategoryMax!: number;
   idCategoryMin!: number;
-  randomCategory!: number;
+  randomCategoryId!: number;
   mapTests: Test[] = [];
   quantity!: number;
   title!: string;
@@ -38,18 +38,18 @@ export class HomePageComponent implements OnInit, OnDestroy {
             startWith(0),
             take(10),
             switchMap(() => {
-              this.randomCategory = Math.floor(Math.random() *
+              this.randomCategoryId = Math.floor(Math.random() *
                 (this.idCategoryMax - this.idCategoryMin) + this.idCategoryMin);
 
               this.quantity = Math.floor(Math.random() * (50 - 10) + 10);
-              return this.quizzesService.getTests(this.randomCategory, this.quantity);
+              return this.quizzesService.getTests(this.randomCategoryId, this.quantity);
             })
           )
         )
       )
       .subscribe((test: Test) => {
         test.quantity = this.quantity;
-        test.title = this.mapCategory.filter(el => el.id === this.randomCategory)
+        test.title = this.mapCategory.filter(el => el.id === this.randomCategoryId)
           .map(el => el.name).join();
         this.mapTests.push(test);
       });
