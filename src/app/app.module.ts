@@ -11,6 +11,7 @@ import { ResultPageComponent } from './result-page/result-page.component';
 import { CardComponent } from './shared/components/card/card.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { TestComponent } from './play-page/test/test.component';
+import { UnescapePipe } from './shared/pipes/unescape.pipe';
 
 @NgModule({
   declarations: [
@@ -21,14 +22,15 @@ import { TestComponent } from './play-page/test/test.component';
     ResultPageComponent,
     CardComponent,
     ErrorPageComponent,
-    TestComponent
+    TestComponent,
+    UnescapePipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [UnescapePipe],
   bootstrap: [AppComponent]
 })
 

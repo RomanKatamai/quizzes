@@ -1,5 +1,5 @@
 <div class="border border-[#ccc] border-solid rounded-[7px] p-4 my-[0.7rem]">
-  <div class="text-center pb-7 pt-7">{{ test.question }}</div>
+  <div class="text-center pb-7 pt-7">{{ test.question | unescape }}</div>
   <div class="block-answers-button pb-5">
     <button
       class="answer-button mt-2 hover:bg-blue-sky hover:text-white hover:ring"
