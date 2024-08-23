@@ -3,10 +3,10 @@
   <div class="block-answers-button pb-5">
     <button
       class="answer-button mt-2 hover:bg-blue-sky hover:text-white hover:ring"
-      *ngFor="let answer of test.answers"
+      *ngFor="let answer of test.answers "
       (click)="respond(this.answer)"
     >
-     {{ answer }}
+     {{ answer | unescape }}
     </button>
   </div>
 </div>
