@@ -1,0 +1,111 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+  class="my-20 mx-auto justify-center flex"
+>
+  <div class="bg-light-gray pb-2 pt-16 pr-20 pl-20 rounded-2xl">
+    <h3 class="text-center text-2xl mb-5">Registration</h3>
+
+    <div class="mb-6">
+      <label>Name:</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        placeholder="Your name..."
+        class="border-2 block min-w-[300px] rounded-xl py-1 mt-1 indent-4"
+      >
+      <div *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
+        <small
+          *ngIf="form.controls['name'].errors?.['required']"
+          class="text-red absolute mt-1"
+        >
+          This field cannot be empty!
+        </small>
+
+        <small
+          *ngIf="form.controls['name'].errors?.['maxlength']"
+          class="text-red absolute mt-1"
+        >
+          Max length is 20 characters. Currently it is {{form.controls['name'].value.length}} characters.
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-6">
+      <label>Email:</label>
+      <input
+        type="text"
+        id="email"
+        formControlName="email"
+        placeholder="Your email..."
+        class="border-2 block min-w-[300px] rounded-xl py-1 mt-1 indent-4"
+      >
+      <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
+        <small
+          *ngIf="form.controls['email'].errors?.['required']"
+          class="text-red absolute mt-1"
+        >
+          This field cannot be empty!
+        </small>
+
+        <small
+          *ngIf="form.controls['email'].errors?.['email']"
+          class="text-red absolute mt-1"
+        >
+          This email does not exist!
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-8">
+      <label>Password:</label>
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        placeholder="Your password..."
+        class="border-2 block min-w-[300px] rounded-xl py-1 mt-1 indent-4"
+      >
+      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
+        <small
+          *ngIf="form.controls['password'].errors?.['required']"
+          class="text-red absolute mt-1"
+        >
+          This field cannot be empty!
+        </small>
+
+        <small
+          *ngIf="form.controls['password'].errors?.['minlength']"
+          class="text-red absolute mt-1"
+        >
+          Min length is 6 characters. Currently it is {{form.controls['password'].value.length}} characters.
+        </small>
+      </div>
+    </div>
+
+    <div class="flex justify-between mb-7">
+      <button
+        class="btn rounded py-2 px-3 hover:bg-blue-sky hover:opacity-80 w-1/2 mr-3"
+        [routerLink]="['/home']"
+      >
+        Back
+      </button>
+
+      <button
+        class="btn rounded py-2 px-3 hover:bg-blue-sky hover:opacity-80 w-1/2"
+        type="submit"
+        [disabled]="form.invalid || disabled"
+      >
+        Create
+      </button>
+    </div>
+
+    <button
+      class="text-sm underline mb-6 block my-0 mx-auto"
+      [routerLink]="['/login']"
+    >
+      Log in
+    </button>
+  </div>
+</form>

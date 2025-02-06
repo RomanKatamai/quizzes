@@ -19,3 +19,9 @@ export interface Test {
   results?: [],
   answers?: string[]
 }
+
+export interface UserInterface {
+  email: string;
+  username: string;
+  password?: string;
+}

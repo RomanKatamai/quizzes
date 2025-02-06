@@ -21,6 +21,8 @@ export class ResultPageComponent {
   }
 
   clearData() {
-    localStorage.clear();
+    localStorage.removeItem('test');
+    localStorage.removeItem('points');
+    localStorage.removeItem('time-spent');
   }
 }

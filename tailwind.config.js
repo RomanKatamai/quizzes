@@ -6,7 +6,10 @@ module.exports = {
   theme: {
     colors: {
       'blue-sky': '#2168c5',
-      'white': '#ffffff'
+      'white': '#ffffff',
+      'red': '#ff0000',
+      'light-gray': '#f0f2f5',
+      'green': '#1b7906'
     },
     extend: {},
   },

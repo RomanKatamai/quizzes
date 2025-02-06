@@ -8,10 +8,17 @@ import { ResultPageComponent } from './result-page/result-page.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { playPageGuard } from './shared/guards/play-page.guard';
 import { finishPageGuard } from './shared/guards/finish-page.guard';
+import { authGuard } from "./shared/guards/auth.guard";
+import { LoginPageComponent } from "./user/login-page/login-page.component";
+import { RegistrationPageComponent } from "./user/registration-page/registration-page.component";
+import { HistoryPageComponent } from "./user/history-page/history-page.component";
 
 const routes: Routes = [
   {path: '', component: MainLayoutComponent, children: [
       {path: 'home', component: HomePageComponent},
+      {path: 'login', component: LoginPageComponent, canActivate: [authGuard]},
+      {path: 'register', component: RegistrationPageComponent, canActivate: [authGuard]},
+      {path: 'history', component: HistoryPageComponent},
       {path: 'play', component: PlayPageComponent, canActivate: [playPageGuard]},
       {path: 'finish', component: ResultPageComponent, canActivate: [finishPageGuard]},
       {path: '', redirectTo: 'home', pathMatch: 'full'},

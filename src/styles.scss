@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 :root {
-  --light-color: #f4f4f4;
+  --light-color: #c2bfbf;
   --diagonal-gradient: linear-gradient(to bottom right, #1758FE, #6925D0);
   --button-diagonal-gradient: linear-gradient(to right, #229DF6, #6925D0);
 }
@@ -42,4 +42,6 @@ body {
     background: var(--light-color);
     color: #111;
   }
+
 }
+

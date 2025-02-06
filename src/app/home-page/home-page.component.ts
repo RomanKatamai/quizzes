@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, startWith, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
-import { QuizzesService } from '../shared/quizzes.service';
+import { QuizzesService } from '../shared/services/quizzes.service';
 import { Category, Test } from '../shared/interfaces';
 
 @Component({

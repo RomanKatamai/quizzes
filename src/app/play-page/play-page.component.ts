@@ -74,7 +74,7 @@ export class PlayPageComponent implements OnInit {
   }
 
   closing() {
-    localStorage.clear();
+    localStorage.removeItem('test');
   }
 
 }
