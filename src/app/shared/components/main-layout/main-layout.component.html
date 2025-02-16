@@ -1,18 +1,18 @@
 <nav class="navbar flex justify-between items-center z-[1] w-full opacity-90 px-[2rem]
  py-[0.2rem] mb-[1rem] border-b border-[var(--dark-color)] text-white text-[20px] sm:px-[2rem] sm:py-[0.2rem]
- md:px-[5rem] md:py-[0.4rem] lg:px-[8rem] lg:py-[0.7rem]
+ md:px-[2rem] md:py-[0.4rem]
 ">
   <div class="my-3">
     <a class=" font-bold sm:text-2xl lg:text-4xl" routerLink="/" (click)="goHome()">Quizzes</a>
   </div>
-  <div class="text-center text-sm sm:text-base lg:text-2xl" *ngIf="!authorized">Log in or register to save your results --></div>
+  <div class="text-center text-sm sm:text-base lg:text-2xl hidden sm:block" *ngIf="!authorized">Log in or register to save your results --></div>
   <div *ngIf="!authorized; else other_content">
     <a routerLink="/login" class="mr-5 text-sm sm:text-base">Login</a>
     <a routerLink="/register" class="text-sm sm:text-base">Create an account</a>
   </div>
   <ng-template #other_content>
     <div>
-      <button class="mr-5 text-sm sm:text-base" routerLink="/history">{{ username }}</button>
+      <button class="mr-5 text-sm sm:text-base" routerLink="/user-page">{{ auth.userName }}</button>
       <button class="text-sm sm:text-base" (click)="Logout()">Logout</button>
     </div>
   </ng-template>

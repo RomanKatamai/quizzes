@@ -24,4 +24,19 @@ export interface UserInterface {
   email: string;
   username: string;
   password?: string;
+  id?: string;
+}
+
+export interface FBCreateResponse {
+  name: string
+}
+
+export interface Card {
+  id?: string;
+  title: string;
+  correct_answer: number;
+  percent: number;
+  time: string;
+  date: Date;
+  quantity: number;
 }

@@ -9,4 +9,3 @@ export const environment: Environment = {
 export const environmentFireBase: EnvironmentFireBase = {
   ...defaultEnvironmentFireBase
 }
-

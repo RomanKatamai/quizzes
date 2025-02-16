@@ -1,8 +1,8 @@
-import {Component, OnDestroy} from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
-import {Subject, takeUntil} from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
   selector: 'app-registration-page',
@@ -14,6 +14,7 @@ export class RegistrationPageComponent implements OnDestroy {
   form!: FormGroup;
   disabled = false;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  error: string | null = null;
 
   constructor(
     private auth: AuthService,
@@ -27,15 +28,18 @@ export class RegistrationPageComponent implements OnDestroy {
   }
 
   submit() {
-    this.disabled = true
-    const rawForm = this.form.getRawValue()
+    this.disabled = true;
+    const rawForm = this.form.getRawValue();
     this.auth.register(rawForm.email, rawForm.name, rawForm.password).pipe(takeUntil(this.destroy$)).subscribe( {
       next: (data) => {
         this.router.navigateByUrl('/home');
         console.log()
         localStorage.setItem('fb-token', String(true));
       },
-      error: () => this.disabled = false
+      error: () => {
+        this.disabled = false;
+        this.error = "This email is already taken.";
+      }
     })
   }
 

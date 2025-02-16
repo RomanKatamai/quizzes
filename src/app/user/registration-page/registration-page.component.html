@@ -3,17 +3,17 @@
   (ngSubmit)="submit()"
   class="my-20 mx-auto justify-center flex"
 >
-  <div class="bg-light-gray pb-2 pt-16 pr-20 pl-20 rounded-2xl">
+  <div class="w-full sm:w-auto bg-light-gray pb-2 pt-8 px-10 sm:px-20 sm:pt-16 rounded-2xl">
     <h3 class="text-center text-2xl mb-5">Registration</h3>
 
-    <div class="mb-6">
+    <div class="mb-6 sm:min-w-[300px]">
       <label>Name:</label>
       <input
         type="text"
         id="name"
         formControlName="name"
         placeholder="Your name..."
-        class="border-2 block min-w-[300px] rounded-xl py-1 mt-1 indent-4"
+        class="border-2 block w-full rounded-xl py-1 mt-1 indent-4"
       >
       <div *ngIf="form.controls['name'].invalid && form.controls['name'].touched">
         <small
@@ -39,7 +39,7 @@
         id="email"
         formControlName="email"
         placeholder="Your email..."
-        class="border-2 block min-w-[300px] rounded-xl py-1 mt-1 indent-4"
+        class="border-2 block w-full rounded-xl py-1 mt-1 indent-4"
       >
       <div *ngIf="form.controls['email'].invalid && form.controls['email'].touched">
         <small
@@ -65,9 +65,9 @@
         id="password"
         formControlName="password"
         placeholder="Your password..."
-        class="border-2 block min-w-[300px] rounded-xl py-1 mt-1 indent-4"
+        class="border-2 block w-full rounded-xl py-1 mt-1 indent-4"
       >
-      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched">
+      <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched; else error_register">
         <small
           *ngIf="form.controls['password'].errors?.['required']"
           class="text-red absolute mt-1"
@@ -79,12 +79,17 @@
           *ngIf="form.controls['password'].errors?.['minlength']"
           class="text-red absolute mt-1"
         >
-          Min length is 6 characters. Currently it is {{form.controls['password'].value.length}} characters.
+          Min length is 6 characters. Currently it is {{ form.controls['password'].value.length }} characters.
         </small>
       </div>
+      <ng-template #error_register>
+        <div class="text-red absolute text-sm mt-1" *ngIf="error">
+          {{ error }}
+        </div>
+      </ng-template>
     </div>
 
-    <div class="flex justify-between mb-7">
+    <div class="flex justify-between mb-3 sm:mb-7">
       <button
         class="btn rounded py-2 px-3 hover:bg-blue-sky hover:opacity-80 w-1/2 mr-3"
         [routerLink]="['/home']"
@@ -102,7 +107,7 @@
     </div>
 
     <button
-      class="text-sm underline mb-6 block my-0 mx-auto"
+      class="text-sm underline mb-3 sm:mb-6 block my-0 mx-auto"
       [routerLink]="['/login']"
     >
       Log in

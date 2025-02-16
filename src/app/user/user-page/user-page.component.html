@@ -1,0 +1,26 @@
+<div class="mt-8">
+  <div class="flex">
+    <div class="w-1/6 h-1/6 border-2 rounded-2xl">
+      <img src="https://img.freepik.com/premium-vector/3d-simple-user-icon-isolated_169241-6922.jpg">
+    </div>
+    <div class="flex justify-between content-center w-full ">
+      <small class="font-bold text-lg ml-5 mt-5">{{ auth.userName }}</small>
+      <button class="h-1/6 w-8"><img src="assets/icons/settings.png"></button>
+    </div>
+  </div>
+  <h3 class="text-center text-3xl mt-8 mb-8">Your Results</h3>
+  <div class="md:grid max-w-[1100px] md:grid-cols-2 gap-x-[30px] mx-auto
+            flex flex-col items-center"
+    *ngIf="(cards || []).length > 0; else results"
+  >
+      <app-result-card
+        class="w-full max-w-[550px]"
+        *ngFor="let card of cards"
+        [card]=card
+      >
+      </app-result-card>
+  </div>
+</div>
+<ng-template #results>
+  <p class="text-center">No results. Take any quiz first!</p>
+</ng-template>

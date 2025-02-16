@@ -1,5 +1,6 @@
-<div class="flex justify-between mt-8 mb-4">
-  <h3 class="title content-center text-2xl">List of quizzes</h3>
+<div class="text-center text-md sm:text-base lg:text-2xl block sm:hidden font-bold">Log in or register to save your results!</div>
+<div class="flex justify-between mt-4 mb-4">
+  <h3 class="content-center md:text-2xl text-[20px]">List of quizzes</h3>
   <div class="loader" *ngIf="mapTests.length < 10"></div>
   <div class="content-center">
     <button
@@ -12,10 +13,13 @@
     </button>
   </div>
 </div>
-<div class="quizzes"
+<div class="md:grid max-w-[1100px] md:grid-cols-2 gap-x-[30px] mx-auto
+            flex flex-col items-center"
      *ngIf="mapTests; else loading"
 >
-  <app-card *ngFor="let test of mapTests"
+  <app-card
+    class="w-full max-w-[550px]"
+    *ngFor="let test of mapTests"
     [test] = test
   ></app-card>
 </div>

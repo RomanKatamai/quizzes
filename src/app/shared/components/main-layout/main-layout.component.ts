@@ -1,7 +1,7 @@
-import {Component, DoCheck, OnInit } from '@angular/core';
+import {Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
 import { AuthService } from "../../services/auth.service";
-import {Router} from "@angular/router";
-
+import { Router } from "@angular/router";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-main-layout',
@@ -9,9 +9,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./main-layout.component.scss']
 })
 
-export class MainLayoutComponent implements OnInit, DoCheck {
-  username!: string | undefined
-  authorized!: string | null
+export class MainLayoutComponent implements OnInit, DoCheck, OnDestroy {
+  username!: string | undefined;
+  authorized!: string | null;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     public auth: AuthService,
@@ -19,7 +20,7 @@ export class MainLayoutComponent implements OnInit, DoCheck {
   ) {}
 
   ngOnInit(): void {
-    this.auth.user$.subscribe(user=> {
+    this.auth.user$.pipe(takeUntil(this.destroy$)).subscribe(user=> {
       if(user) {
         this.auth.currentUserSig.set({
           email: user.email!,
@@ -28,17 +29,22 @@ export class MainLayoutComponent implements OnInit, DoCheck {
       } else {
         this.auth.currentUserSig.set(null)
       }
-      this.username = this.auth.currentUserSig()?.username
+      this.username = this.auth.userName;
     });
   }
 
   ngDoCheck() {
-    this.authorized = localStorage.getItem('fb-token')
+    this.authorized = localStorage.getItem('fb-token');
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 
   Logout() {
     this.auth.logout();
-    this.router.navigate(['home'])
+    this.router.navigate(['home']);
   }
 
   goHome() {

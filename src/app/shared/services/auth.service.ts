@@ -1,7 +1,14 @@
 import { Injectable, signal } from "@angular/core";
 import { from, Observable } from "rxjs";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, user } from "@angular/fire/auth";
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  user
+} from "@angular/fire/auth";
 import { UserInterface } from "../interfaces";
 
 @Injectable({
@@ -9,14 +16,34 @@ import { UserInterface } from "../interfaces";
 })
 
 export class AuthService {
-  user$ = user(this.firebaseAuth)
-  currentUserSig = signal<UserInterface | null | undefined>(undefined)
-  error!: string
+  user$ = user(this.firebaseAuth);
+  currentUserSig = signal<UserInterface | null | undefined>(undefined);
+  error!: string;
+  userName!: string | undefined;
+  id!: string | undefined;
+
+  public getCurrentUser() {
+    this.user$.subscribe((firebaseUser) => {
+      if (firebaseUser) {
+        this.currentUserSig.set({
+          id: firebaseUser.uid,
+          email: firebaseUser.email || '',
+          username: firebaseUser.displayName || '',
+        });
+        this.userName = this.currentUserSig()?.username;
+        this.id = this.currentUserSig()?.id;
+      } else {
+        this.currentUserSig.set(null);
+      }
+    });
+  }
 
   constructor(
     private auth: AngularFireAuth,
     private firebaseAuth: Auth
-  ) {}
+  ) {
+    this.getCurrentUser();
+  }
 
   login(email: string, password: string): Observable<any> {
     const promise = signInWithEmailAndPassword(

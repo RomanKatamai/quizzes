@@ -19,7 +19,7 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { environmentFireBase } from "../environments/environment";
 import { initializeApp, provideFirebaseApp } from "@angular/fire/app";
 import { getAuth, provideAuth } from "@angular/fire/auth";
-import { HistoryPageComponent } from './user/history-page/history-page.component';
+import { UserPageComponent } from './user/user-page/user-page.component';
 import { ResultCardComponent } from './user/result-card/result-card.component';
 
 
@@ -36,7 +36,7 @@ import { ResultCardComponent } from './user/result-card/result-card.component';
     UnescapePipe,
     LoginPageComponent,
     RegistrationPageComponent,
-    HistoryPageComponent,
+    UserPageComponent,
     ResultCardComponent
   ],
   imports: [

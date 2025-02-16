@@ -5,5 +5,6 @@ export interface Environment {
 
 export interface EnvironmentFireBase {
   production: boolean,
+  FbDBUrl: string,
   firebase: {}
 }
