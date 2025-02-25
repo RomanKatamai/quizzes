@@ -1,7 +1,7 @@
-import {Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
-import {Subject, takeUntil} from "rxjs";
+import { Subject, takeUntil } from "rxjs";
 
 @Component({
   selector: 'app-main-layout',

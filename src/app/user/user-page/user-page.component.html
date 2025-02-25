@@ -1,24 +1,106 @@
 <div class="mt-8">
-  <div class="flex">
-    <div class="w-1/6 h-1/6 border-2 rounded-2xl">
-      <img src="https://img.freepik.com/premium-vector/3d-simple-user-icon-isolated_169241-6922.jpg">
+  <div class="lg:flex">
+    <div class="w-[300px] h-[300px] sm:w-[250px] sm:h-[250px] lg:w-[157px] lg:h-[157px] my-0 mx-auto sm:my-0 sm:mx-0">
+      <img class="border-2 rounded-xl" src="https://img.freepik.com/premium-vector/3d-simple-user-icon-isolated_169241-6922.jpg">
     </div>
-    <div class="flex justify-between content-center w-full ">
-      <small class="font-bold text-lg ml-5 mt-5">{{ auth.userName }}</small>
-      <button class="h-1/6 w-8"><img src="assets/icons/settings.png"></button>
+    <div class="lg:ml-10 lg:mt-0 mt-5">
+      <form
+         class="sm:flex"
+        [formGroup]="nameChangeForm"
+        (ngSubmit)="UpdateName()"
+      >
+        <div class="mb-7 sm:min-w-[300px] mr-0 sm:mr-5 mt-3 sm:mt-0">
+          <label>Name:</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            placeholder="Your name..."
+            class="border-2 block w-full rounded-xl py-1 mt-1 indent-4"
+          >
+          <div *ngIf="nameChangeForm.controls['name'].invalid && nameChangeForm.controls['name'].touched">
+            <small
+              *ngIf="nameChangeForm.controls['name'].errors?.['required']"
+              class="text-red absolute mt-1"
+            >
+              This field cannot be empty!
+            </small>
+
+            <small
+              *ngIf="nameChangeForm.controls['name'].errors?.['maxlength']"
+              class="text-red absolute mt-1"
+            >
+              Max length is 20 characters. Currently it is {{nameChangeForm.controls['name'].value.length}} characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="mx-0 my-auto">
+          <button
+            class="btn rounded py-2 px-3 hover:bg-blue-sky hover:opacity-80"
+            type="submit"
+            [disabled]="nameChangeForm.invalid"
+          >
+            Update name
+          </button>
+        </div>
+      </form>
+      <form
+        class="sm:flex"
+        [formGroup]="passwordChangeFrom"
+        (ngSubmit)="UpdatePassword()"
+      >
+        <div class="mb-7 sm:min-w-[300px] mr-0 sm:mr-5 mt-3 sm:mt-0">
+          <label>New password:</label>
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="Your password..."
+            class="border-2 block w-full rounded-xl py-1 mt-1 indent-4"
+          >
+          <div
+            *ngIf="passwordChangeFrom.controls['password'].invalid && passwordChangeFrom.controls['password'].touched">
+            <small
+              *ngIf="passwordChangeFrom.controls['password'].errors?.['required']"
+              class="text-red absolute mt-1"
+            >
+              This field cannot be empty!
+            </small>
+
+            <small
+              *ngIf="passwordChangeFrom.controls['password'].errors?.['minlength']"
+              class="text-red absolute mt-1"
+            >
+              Min length is 6 characters. Currently it is {{ passwordChangeFrom.controls['password'].value.length }}
+              characters.
+            </small>
+          </div>
+        </div>
+
+        <div class="mx-0 my-auto">
+          <button
+            class="btn rounded py-2 px-3 hover:bg-blue-sky hover:opacity-80"
+            type="submit"
+            [disabled]="passwordChangeFrom.invalid"
+          >
+            Update password
+          </button>
+        </div>
+      </form>
     </div>
   </div>
   <h3 class="text-center text-3xl mt-8 mb-8">Your Results</h3>
   <div class="md:grid max-w-[1100px] md:grid-cols-2 gap-x-[30px] mx-auto
             flex flex-col items-center"
-    *ngIf="(cards || []).length > 0; else results"
+       *ngIf="(cards || []).length > 0; else results"
   >
-      <app-result-card
-        class="w-full max-w-[550px]"
-        *ngFor="let card of cards"
-        [card]=card
-      >
-      </app-result-card>
+    <app-result-card
+      class="w-full max-w-[550px]"
+      *ngFor="let card of cards"
+      [card]=card
+    >
+    </app-result-card>
   </div>
 </div>
 <ng-template #results>

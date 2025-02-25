@@ -4,7 +4,6 @@ import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
 
-
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',

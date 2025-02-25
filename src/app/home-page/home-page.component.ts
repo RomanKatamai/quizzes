@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { interval, startWith, Subject, switchMap, take, takeUntil, tap } from 'rxjs';
 
 import { QuizzesService } from '../shared/services/quizzes.service';
@@ -10,7 +10,7 @@ import { Category, Test } from '../shared/interfaces';
   styleUrls: ['./home-page.component.scss']
 })
 
-export class HomePageComponent implements OnInit, OnDestroy {
+export class HomePageComponent implements OnInit, DoCheck, OnDestroy {
   mapCategory!: Category[];
   idCategoryMax!: number;
   idCategoryMin!: number;
@@ -20,6 +20,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   title!: string;
   disabled = true;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  authorized!: string | null;
 
   constructor(private quizzesService: QuizzesService) {};
 
@@ -53,6 +54,10 @@ export class HomePageComponent implements OnInit, OnDestroy {
           .map(el => el.name).join();
         this.mapTests.push(test);
       });
+  }
+
+  ngDoCheck() {
+    this.authorized = localStorage.getItem('fb-token');
   }
 
   ngOnDestroy() {

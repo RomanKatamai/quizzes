@@ -33,7 +33,6 @@ export class RegistrationPageComponent implements OnDestroy {
     this.auth.register(rawForm.email, rawForm.name, rawForm.password).pipe(takeUntil(this.destroy$)).subscribe( {
       next: (data) => {
         this.router.navigateByUrl('/home');
-        console.log()
         localStorage.setItem('fb-token', String(true));
       },
       error: () => {

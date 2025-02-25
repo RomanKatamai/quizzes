@@ -3,8 +3,6 @@ import { Card } from "../shared/interfaces";
 import { AuthService } from "../shared/services/auth.service";
 import { CardsService } from "../shared/services/cards.service";
 
-
-
 @Component({
   selector: 'app-result-page',
   templateUrl: './result-page.component.html',

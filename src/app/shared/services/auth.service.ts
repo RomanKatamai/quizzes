@@ -1,15 +1,17 @@
 import { Injectable, signal } from "@angular/core";
-import { from, Observable } from "rxjs";
+import { from, mergeMap, Observable } from "rxjs";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
+  signOut, updatePassword,
   updateProfile,
   user
 } from "@angular/fire/auth";
 import { UserInterface } from "../interfaces";
+import firebase from "firebase/compat";
+import User = firebase.User;
 
 @Injectable({
   providedIn: "root"
@@ -71,5 +73,15 @@ export class AuthService {
     localStorage.removeItem('fb-token');
     const promise = signOut(this.firebaseAuth);
     return from(promise)
+  }
+
+  updatePassword(user: User, newPassword: string) {
+    from(updatePassword(user, newPassword)).pipe(
+      mergeMap(() => this.login(user.email as string, newPassword))
+    )
+  }
+
+  updateName(user: User, name: string) {
+    updateProfile(user, {displayName: name}).then(() => {})
   }
 }
