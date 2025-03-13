@@ -10,8 +10,7 @@ import {
   user
 } from "@angular/fire/auth";
 import { UserInterface } from "../interfaces";
-import firebase from "firebase/compat";
-import User = firebase.User;
+import { User } from "@angular/fire/auth";
 
 @Injectable({
   providedIn: "root"
@@ -21,8 +20,6 @@ export class AuthService {
   user$ = user(this.firebaseAuth);
   currentUserSig = signal<UserInterface | null | undefined>(undefined);
   error!: string;
-  userName!: string | undefined;
-  id!: string | undefined;
 
   public getCurrentUser() {
     this.user$.subscribe((firebaseUser) => {
@@ -32,8 +29,7 @@ export class AuthService {
           email: firebaseUser.email || '',
           username: firebaseUser.displayName || '',
         });
-        this.userName = this.currentUserSig()?.username;
-        this.id = this.currentUserSig()?.id;
+
       } else {
         this.currentUserSig.set(null);
       }
@@ -43,9 +39,7 @@ export class AuthService {
   constructor(
     private auth: AngularFireAuth,
     private firebaseAuth: Auth
-  ) {
-    this.getCurrentUser();
-  }
+  ) {}
 
   login(email: string, password: string): Observable<any> {
     const promise = signInWithEmailAndPassword(
@@ -66,6 +60,12 @@ export class AuthService {
       email,
       password
     ).then(response => updateProfile(response.user, {displayName: name}))
+      .then(() => {
+      this.currentUserSig.update((value) => ({
+        ...value,
+        username: name,
+      }));
+    })
     return from(promise)
   }
 
@@ -82,6 +82,11 @@ export class AuthService {
   }
 
   updateName(user: User, name: string) {
-    updateProfile(user, {displayName: name}).then(() => {})
+    updateProfile(user, {displayName: name}).then(() => {
+      this.currentUserSig.update((value) => ({
+        ...value,
+        username: name,
+      }));
+    })
   }
 }

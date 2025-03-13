@@ -1,7 +1,7 @@
-import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
+import { Component, computed, DoCheck, OnDestroy } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
-import { Subject, takeUntil } from "rxjs";
+import { Subject } from "rxjs";
 
 @Component({
   selector: 'app-main-layout',
@@ -9,29 +9,15 @@ import { Subject, takeUntil } from "rxjs";
   styleUrls: ['./main-layout.component.scss']
 })
 
-export class MainLayoutComponent implements OnInit, DoCheck, OnDestroy {
-  username!: string | undefined;
+export class MainLayoutComponent implements DoCheck, OnDestroy {
   authorized!: string | null;
   destroy$: Subject<boolean> = new Subject<boolean>();
+  name = computed(() => this.auth.currentUserSig()?.username)
 
   constructor(
     public auth: AuthService,
     private router: Router
   ) {}
-
-  ngOnInit(): void {
-    this.auth.user$.pipe(takeUntil(this.destroy$)).subscribe(user=> {
-      if(user) {
-        this.auth.currentUserSig.set({
-          email: user.email!,
-          username: user.displayName!
-        })
-      } else {
-        this.auth.currentUserSig.set(null)
-      }
-      this.username = this.auth.userName;
-    });
-  }
 
   ngDoCheck() {
     this.authorized = localStorage.getItem('fb-token');

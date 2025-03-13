@@ -34,7 +34,7 @@ export class ResultPageComponent {
       date: new Date(),
       correct_answer: this.points,
       title: JSON.parse(localStorage.getItem('test') as string).title,
-      id: this.auth.id,
+      id: this.id,
       quantity: this.quantity
     }
 

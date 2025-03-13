@@ -21,7 +21,7 @@ export interface Test {
 }
 
 export interface UserInterface {
-  email: string;
+  email?: string;
   username: string;
   password?: string;
   id?: string;

@@ -1,44 +1,62 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../shared/services/auth.service";
 import { CardsService } from "../../shared/services/cards.service";
 import { Card } from "../../shared/interfaces";
 import { Subject, Subscription, switchMap, takeUntil } from "rxjs";
 import { toObservable } from "@angular/core/rxjs-interop";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { getAuth } from "@angular/fire/auth";
-import firebase from "firebase/compat";
-import User = firebase.User;
+import { Auth, getAuth, onAuthStateChanged, User } from "@angular/fire/auth";
 
 @Component({
   selector: 'app-user-page',
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.scss']
 })
-export class UserPageComponent {
+
+export class UserPageComponent implements OnInit {
   cards?: Card[];
   destroy$: Subject<boolean> = new Subject<boolean>();
-  id$!: Subscription;
+  idSub!: Subscription;
+  nameSub!: Subscription;
   nameChangeForm!: FormGroup;
   passwordChangeFrom!: FormGroup;
-  auth = getAuth();
-  user = this.auth.currentUser;
+  auth!: Auth;
+  user!: User | null;
 
   constructor(
-    public authService: AuthService,
+    private authService: AuthService,
     private cardService: CardsService
   ) {
-    this.id$ = toObservable(this.authService.currentUserSig).pipe(
-      switchMap(() => this.cardService.getById(this.authService.id)),
+    this.idSub = toObservable(this.authService.currentUserSig).pipe(
+      switchMap(() => this.cardService.getById(this.authService.currentUserSig()?.id)),
       takeUntil(this.destroy$)
     ).subscribe((cards) => {
       this.cards = Object.values(cards);
     })
+
     this.nameChangeForm = new FormGroup({
-      name: new FormControl(this.authService.userName, [Validators.required, Validators.maxLength(20)])
+      name: new FormControl('', [Validators.required, Validators.maxLength(20)])
     })
+
     this.passwordChangeFrom = new FormGroup({
       password: new FormControl('', [Validators.minLength(6), Validators.required])
     })
+
+    this.nameSub = toObservable(this.authService.currentUserSig).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe((name) => {
+      if(name) {
+        this.nameChangeForm.reset({ name: name.username })
+      }
+    })
+  }
+
+  ngOnInit() {
+    this.auth = getAuth();
+
+    onAuthStateChanged(this.auth, (user) => {
+      this.user = user;
+    });
   }
 
   UpdateName() {
