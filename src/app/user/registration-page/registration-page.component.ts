@@ -1,8 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
+import { AuthService } from "../../shared/services/auth.service";
 
 @Component({
   selector: 'app-registration-page',

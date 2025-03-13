@@ -7,10 +7,11 @@ import {
   signInWithEmailAndPassword,
   signOut, updatePassword,
   updateProfile,
-  user
+  user,
+  User
 } from "@angular/fire/auth";
 import { UserInterface } from "../interfaces";
-import { User } from "@angular/fire/auth";
+
 
 @Injectable({
   providedIn: "root"

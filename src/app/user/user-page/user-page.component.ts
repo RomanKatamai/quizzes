@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Auth, getAuth, onAuthStateChanged, User } from "@angular/fire/auth";
+import { Subject, Subscription, switchMap, takeUntil } from "rxjs";
+import { toObservable } from "@angular/core/rxjs-interop";
+
 import { AuthService } from "../../shared/services/auth.service";
 import { CardsService } from "../../shared/services/cards.service";
 import { Card } from "../../shared/interfaces";
-import { Subject, Subscription, switchMap, takeUntil } from "rxjs";
-import { toObservable } from "@angular/core/rxjs-interop";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Auth, getAuth, onAuthStateChanged, User } from "@angular/fire/auth";
 
 @Component({
   selector: 'app-user-page',
