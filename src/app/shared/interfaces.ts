@@ -15,7 +15,7 @@ export interface Test {
   category: string,
   question: string,
   correct_answer: string,
-  incorrect_answers: [],
+  incorrect_answers: string[],
   results?: [],
   answers?: string[]
 }

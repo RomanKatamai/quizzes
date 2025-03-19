@@ -22,7 +22,6 @@ import { getAuth, provideAuth } from "@angular/fire/auth";
 import { UserPageComponent } from './user/user-page/user-page.component';
 import { ResultCardComponent } from './user/result-card/result-card.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
